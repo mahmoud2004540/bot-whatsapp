@@ -1,0 +1,25 @@
+name = "whatsapp-bot"
+main = "src/index.ts"
+compatibility_date = "2026-01-15"
+
+# Daily cleanup of old conversations (see RETENTION_DAYS).
+[triggers]
+crons = ["17 3 * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "whatsapp-bot"
+# Replace with the id printed by: npx wrangler d1 create whatsapp-bot
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[vars]
+GRAPH_API_VERSION = "v26.0"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_FALLBACK_MODEL = "llama-3.1-8b-instant"
+# Hard stop on business messages per calendar month (UTC).
+# Meta's free allowance is 1,000 per number; the margin covers billing differences.
+MONTHLY_REPLY_LIMIT = "950"
+MAX_USER_MSGS_PER_HOUR = "20"
+HANDOFF_HOURS = "24"
+RETENTION_DAYS = "30"

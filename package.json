@@ -1,0 +1,22 @@
+{
+  "name": "whatsapp-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "db:local": "wrangler d1 migrations apply whatsapp-bot --local",
+    "db:remote": "wrangler d1 migrations apply whatsapp-bot --remote",
+    "check:business": "node scripts/check-business.mjs",
+    "deploy": "npm run check:business && wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "node test/e2e.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0",
+    "wrangler": "^4.0.0"
+  }
+}
